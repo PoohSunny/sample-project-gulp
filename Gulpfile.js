@@ -22,4 +22,18 @@ gulp.task('test', function() {
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(jshint.reporter('fail')); // The fail reporter will terminate this task if an error has been found.
-})
+});
+
+var less = require('gulp-less');
+var minifyCSS = require('gulp-minify-css');
+var prefix = require('gulp-autoprefixer');
+
+gulp.task('styles', function() {
+    return gulp.src([
+        'app/styles/main.less'
+    ])
+    .pipe(less())
+    .pipe(minifyCSS())
+    .pipe(prefix())
+    .pipe(gulp.dest('dist'));
+});
